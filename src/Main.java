@@ -17,7 +17,7 @@ public class Main {
         boolean correctAccount = false;
 
         System.out.println("Welcome!");
-        // Make user reenter invalid options
+        // If user input is invalid asks for input again
         while (!validOption)
         {
             System.out.print("To login enter '1', to register enter '2': ");
@@ -43,6 +43,7 @@ public class Main {
                 enteredUser = reader.nextLine();
                 System.out.print("Please enter your password: ");
                 enteredPass = reader.nextLine();
+                // Call method to check login details are correct
                 if(loginController.checkAccount(enteredUser,enteredPass)){
                     correctAccount = true;
                 }
@@ -56,14 +57,14 @@ public class Main {
             enteredUser = reader.nextLine();
             System.out.print("Please enter a password: ");
             enteredPass = reader.nextLine();
-
+            // Calls method to create a account file
             loginController.registerAccount(enteredUser,enteredPass);
         }
 
         System.out.println("Welcome " + loginController.getUsername());
-        // TODO: Add ability to delete account when file accounts implemented
         validOption = false;
         System.out.println("What would you like to do?");
+        // If user input is invalid asks for input again
         while (!validOption)
         {
             System.out.print("To delete account enter '2': ");
@@ -81,6 +82,7 @@ public class Main {
         }
 
         if(option.equals("2")){
+            // Calls method to delete account file
             loginController.deleteAccount();
         }
     }

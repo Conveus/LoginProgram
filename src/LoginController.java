@@ -13,11 +13,9 @@ public class LoginController {
     private String username = "user";
     private String password = "1234";
 
-    // Register account
-    // DONE: Write accounts to file
+    // Registers account by creating file named after username containing the user and password
     public boolean registerAccount(String user, String pass) throws IOException{
-        //username = user.trim();
-        //password = pass;
+
         // Creates variable for filename from user input
         String fileName = location+user.toLowerCase().trim()+".txt";
         File account = new File(fileName);
@@ -26,6 +24,7 @@ public class LoginController {
             // Creates account
             if(account.createNewFile()){
                 System.out.println("Account created");
+                // Calls method to write username and password to file
                 recordAccountDetails(user, pass, fileName);
                 setUsername(user);
                 setPassword(pass);
@@ -45,7 +44,7 @@ public class LoginController {
     public boolean recordAccountDetails(String user, String pass, String file){
         try{
             FileWriter myWriter = new FileWriter(file);
-            // Writes username on first line and password on second
+            // Writes username and password
             myWriter.write(user + pass);
             myWriter.close();
             System.out.println("Successfully wrote to file");
@@ -58,15 +57,8 @@ public class LoginController {
     }
 
     // Check account details are correct
-    // DONE: Check account(s) in file
     public boolean checkAccount(String user, String pass) throws IOException
     {
-        /*if((username.toLowerCase()).equals(user.toLowerCase().trim()) && password.equals(pass.trim())){
-            return true;
-        }
-        else{
-            return false;
-        }*/
 
         // Creates variable for filename from user input
         String fileName = location+user.toLowerCase().trim()+".txt";
@@ -78,9 +70,11 @@ public class LoginController {
             if(account.exists()){
                 while (reader.hasNextLine())
                 {
+                    // Sets variable to contents of file
                     data = reader.nextLine();
                 }
                 reader.close();
+                // Checks variable has the correct username and password
                 if(data.equals(user+pass)){
                     setUsername(user);
                     setPassword(pass);
@@ -99,6 +93,7 @@ public class LoginController {
         }
     }
 
+    // Deletes account file if confirmation given
     public boolean deleteAccount(){
         String fileName = location+username.toLowerCase().trim()+".txt";
         File account = new File(fileName);
