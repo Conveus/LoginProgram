@@ -62,5 +62,26 @@ public class Main {
 
         System.out.println("Welcome " + loginController.getUsername());
         // TODO: Add ability to delete account when file accounts implemented
+        validOption = false;
+        System.out.println("What would you like to do?");
+        while (!validOption)
+        {
+            System.out.print("To delete account enter '2': ");
+            try{
+                option = reader.nextLine().trim();
+                if(option.equals("2")){
+                    validOption = true;
+                }
+                else{
+                    System.out.println("Invalid entry, please try again");
+                }
+            } catch(Exception e1){
+                System.out.println("Invalid entry, please try again");
+            }
+        }
+
+        if(option.equals("2")){
+            loginController.deleteAccount();
+        }
     }
 }
